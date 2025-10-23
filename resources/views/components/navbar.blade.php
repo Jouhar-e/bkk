@@ -183,33 +183,3 @@
      </div>
  </nav>
 
- <!-- Content untuk demonstrasi -->
- <main class="container mx-auto px-4 py-8">
-     <div class="bg-white rounded-lg shadow-md p-6 max-w-4xl mx-auto">
-         <h2 class="text-xl font-bold text-blue-900 mb-4 text-center">Navbar Biru Dongker</h2>
-         <p class="text-gray-600 mb-4 text-center">Menu sekarang diposisikan lebih ke kanan dengan margin yang
-             diperbesar</p>
-
-         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-             <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                 <h3 class="text-lg font-bold text-blue-800 mb-2">Perubahan Posisi:</h3>
-                 <ul class="list-disc list-inside text-blue-700 text-sm space-y-1">
-                     <li>Menu container memiliki <code>mr-8</code> (margin kanan 2rem)</li>
-                     <li>Spacing antar menu diperbesar menjadi <code>space-x-8</code></li>
-                     <li>Padding menu diperbesar <code>px-4 py-2</code></li>
-                     <li>Dropdown menu tetap sejajar dengan <code>right-0</code></li>
-                 </ul>
-             </div>
-
-             <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                 <h3 class="text-lg font-bold text-blue-800 mb-2">Hasil:</h3>
-                 <ul class="list-disc list-inside text-blue-700 text-sm space-y-1">
-                     <li>Menu lebih dekat ke tepi kanan</li>
-                     <li>Jarak antara logo dan menu lebih besar</li>
-                     <li>Tampilan lebih seimbang</li>
-                     <li>Lebih mudah diakses</li>
-                 </ul>
-             </div>
-         </div>
-     </div>
- </main>
