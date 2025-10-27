@@ -67,7 +67,7 @@
                                 </div>
 
                                 <p class="text-gray-700 mb-4 leading-relaxed line-clamp-3">
-                                    {!! Str::limit($article->content, 200) !!}
+                                    {!! Str::limit($article->content, 170) !!}
                                 </p>
 
                                 <a href="{{ route('article.show', $article->slug) }}"
