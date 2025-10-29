@@ -24,7 +24,7 @@ class ManageProfile extends Page implements HasForms
     protected static string|BackedEnum|null $navigationIcon = Heroicon::BuildingOffice;
     protected static ?string $navigationLabel = 'Profil BKK';
     protected static ?string $title = 'Kelola Profil BKK';
-    
+
     // Gunakan view default Filament
     protected string $view = 'filament.pages.manage-profile';
 
@@ -112,9 +112,14 @@ class ManageProfile extends Page implements HasForms
                         ->label('Tentang BKK')
                         ->required()
                         ->toolbarButtons([
-                            'bold', 'italic', 'underline', 'strike',
-                            'bulletList', 'orderedList',
-                            'link', 'blockquote',
+                            'bold',
+                            'italic',
+                            'underline',
+                            'strike',
+                            'bulletList',
+                            'orderedList',
+                            'link',
+                            'blockquote',
                         ])
                         ->columnSpanFull()
                         ->helperText('Deskripsikan tentang BKK, tujuan, dan manfaatnya bagi siswa dan lulusan'),
@@ -122,9 +127,13 @@ class ManageProfile extends Page implements HasForms
                     RichEditor::make('sejarah')
                         ->label('Sejarah BKK')
                         ->toolbarButtons([
-                            'bold', 'italic', 'underline',
-                            'bulletList', 'orderedList',
-                            'link', 'blockquote',
+                            'bold',
+                            'italic',
+                            'underline',
+                            'bulletList',
+                            'orderedList',
+                            'link',
+                            'blockquote',
                         ])
                         ->nullable()
                         ->columnSpanFull()
@@ -274,7 +283,8 @@ class ManageProfile extends Page implements HasForms
                         ->nullable()
                         ->columnSpanFull()
                         ->helperText('Upload foto struktur organisasi BKK. Format: JPG, PNG. Maksimal 5MB'),
-                ]),
+                ])
+                ->extraAttributes(['style' => 'margin-bottom: 2rem;']),
         ];
     }
 
@@ -305,7 +315,6 @@ class ManageProfile extends Page implements HasForms
                 ->body('Profil BKK berhasil diperbarui.')
                 ->success()
                 ->send();
-
         } catch (\Exception $e) {
             Notification::make()
                 ->title('Gagal Menyimpan')

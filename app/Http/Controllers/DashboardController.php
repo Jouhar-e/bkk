@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Profile;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     public function index()
     {
+        $profile = Profile::first();
         $articles = Article::where('is_published', true)->orderBy('updated_at', 'desc')->take(3)->get();
 
         // dd($articles->get());
-        return view('dashboard', compact('articles'));
+        return view('dashboard', compact('articles', 'profile'));
     }
 
     public function show($slug)

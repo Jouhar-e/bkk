@@ -1,4 +1,4 @@
-<x-app>
+<x-app :profile="$profile">
 
     {{-- slider gambar --}}
     <x-slider></x-slider>
