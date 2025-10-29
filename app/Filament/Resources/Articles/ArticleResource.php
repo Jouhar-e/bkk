@@ -22,6 +22,8 @@ class ArticleResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Artikel';
 
+    protected static ?string $navigationLabel = 'Artikel';
+
     public static function form(Schema $schema): Schema
     {
         return ArticleForm::configure($schema);
