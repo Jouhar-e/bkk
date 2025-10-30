@@ -19,13 +19,15 @@ class DashboardController extends Controller
 
     public function show($slug)
     {
+        $profile = Profile::first();
         $article = Article::where('slug', $slug)->firstOrFail();
 
-        return view('show', compact('article'));
+        return view('show', compact('article', 'profile'));
     }
 
     public function info($category)
     {
+        $profile = Profile::first();
         if ($category == 'berita') {
             $articles = Article::where('is_published', true)
                 ->whereIn('category', ['berita', 'kegiatan'])
@@ -41,6 +43,6 @@ class DashboardController extends Controller
         }
 
         // dd($articles);
-        return view('info', compact('articles'));
+        return view('info', compact('articles', 'profile'));
     }
 }

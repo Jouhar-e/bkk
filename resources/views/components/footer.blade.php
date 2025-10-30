@@ -80,7 +80,7 @@
         <div class="container mx-auto px-4 py-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="text-blue-200 text-sm mb-2 md:mb-0 text-center md:text-left">
-                    &copy; 2024 SMK Negeri 1 Contoh. Semua hak dilindungi undang-undang.
+                    &copy; 2024 {{ $profile->nama_sekolah }}. Semua hak dilindungi undang-undang.
                 </div>
                 <div class="flex space-x-4 text-blue-200 text-sm">
                     <a href="#" class="hover:text-white transition duration-300">Kebijakan Privasi</a>
