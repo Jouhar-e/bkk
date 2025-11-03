@@ -284,7 +284,7 @@ class ManageProfile extends Page implements HasForms
                         ->columnSpanFull()
                         ->helperText('Upload foto struktur organisasi BKK. Format: JPG, PNG. Maksimal 5MB'),
                 ])
-                ->extraAttributes(['style' => 'margin-bottom: 2rem;']),
+                ->extraAttributes(['style' => 'margin-bottom: 1.5rem;']),
         ];
     }
 
@@ -351,15 +351,4 @@ class ManageProfile extends Page implements HasForms
         return true;
     }
 
-    public static function getNavigationBadge(): ?string
-    {
-        $profile = Profile::first();
-        return $profile ? '✓' : '!';
-    }
-
-    public static function getNavigationBadgeColor(): ?string
-    {
-        $profile = Profile::first();
-        return $profile ? 'success' : 'warning';
-    }
 }
