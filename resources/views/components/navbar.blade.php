@@ -25,40 +25,14 @@
                     <i class="fas fa-home mr-1"></i>Beranda
                 </a>
 
-                <!-- Profil Dropdown -->
-                <div class="relative group">
-                    <a href="#"
-                        class="px-3 py-2 text-sm font-medium flex items-center rounded-md transition
-                        {{ request()->is('profil/*')
+                <!-- Profil -->
+                <a href="{{ route('profil') }}"
+                    class="px-3 py-2 text-sm font-medium flex items-center rounded-md transition
+                        {{ request()->is('profil')
                             ? 'bg-blue-800 text-white cursor-default'
                             : 'text-blue-200 hover:text-white hover:bg-blue-800' }}">
-                        <i class="fas fa-user-circle mr-1"></i>Profil
-                        <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                    </a>
-
-                    <!-- Dropdown -->
-                    <div
-                        class="dropdown-menu absolute opacity-0 invisible group-hover:visible group-hover:opacity-100
-                               bg-white shadow-lg rounded-md mt-3 py-2 w-48 right-0 border border-blue-100 z-50
-                               transition-all duration-200 ease-out translate-y-2 group-hover:translate-y-0">
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-                            Sejarah Sekolah
-                        </a>
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-                            Visi & Misi
-                        </a>
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-                            Struktur Organisasi
-                        </a>
-                        <a href="#"
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700">
-                            Sarana & Prasarana
-                        </a>
-                    </div>
-                </div>
+                    <i class="fas fa-user-circle mr-1"></i>Profil
+                </a>
 
                 <!-- Info Dropdown -->
                 <div class="relative group">
@@ -109,22 +83,12 @@
                 <i class="fas fa-home mr-2 text-blue-300"></i>Beranda
             </a>
 
-            <!-- Profil Dropdown Mobile -->
-            <div class="border-b border-blue-800">
-                <button
-                    class="flex justify-between items-center w-full py-2 px-3 text-sm font-medium text-blue-200 mobile-dropdown-toggle">
-                    <div class="flex items-center">
-                        <i class="fas fa-user-circle mr-2 text-blue-300"></i>Profil
-                    </div>
-                    <i class="fas fa-chevron-down text-blue-300 text-xs"></i>
-                </button>
-                <div class="pl-6 mt-1 hidden mobile-dropdown-content space-y-1 pb-2">
-                    <a href="#" class="block py-1 text-xs text-blue-300 hover:text-white">Sejarah Sekolah</a>
-                    <a href="#" class="block py-1 text-xs text-blue-300 hover:text-white">Visi & Misi</a>
-                    <a href="#" class="block py-1 text-xs text-blue-300 hover:text-white">Struktur Organisasi</a>
-                    <a href="#" class="block py-1 text-xs text-blue-300 hover:text-white">Sarana & Prasarana</a>
-                </div>
-            </div>
+            {{-- Profile --}}
+            <a href="{{ route('profil') }}"
+                class="flex items-center py-2 px-3 text-sm rounded-md font-medium
+                {{ request()->routeIs('profil') ? 'bg-blue-800 text-white' : 'text-blue-200 hover:bg-blue-800 hover:text-white' }}">
+                <i class="fas fa-user-circle mr-2 text-blue-300"></i>Profil
+            </a>
 
             <!-- Info Dropdown Mobile -->
             <div class="border-b border-blue-800">

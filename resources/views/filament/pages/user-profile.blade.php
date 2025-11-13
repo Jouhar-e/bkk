@@ -1,3 +1,6 @@
-<x-filament-panels::page>
+<x-filament::page>
     {{ $this->form }}
-</x-filament-panels::page>
+    <x-filament::button wire:click="save" class="mt-4">
+        Simpan
+    </x-filament::button>
+</x-filament::page>

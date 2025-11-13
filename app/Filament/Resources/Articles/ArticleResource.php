@@ -22,7 +22,7 @@ class ArticleResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'Artikel';
 
-    protected static ?string $navigationLabel = 'Artikel';
+    protected static ?string $navigationLabel = 'Data Artikel';
 
     public static function form(Schema $schema): Schema
     {

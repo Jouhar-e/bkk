@@ -25,6 +25,11 @@ class DashboardController extends Controller
         return view('show', compact('article', 'profile'));
     }
 
+    public function profile(){
+        $profile = Profile::first();
+        return view('profile', compact('profile'));
+    }
+
     public function info($category)
     {
         $profile = Profile::first();

@@ -1,7 +1,7 @@
 <x-app :profile="$profile">
 
     {{-- slider gambar --}}
-    <x-slider></x-slider>
+    <x-slider :articles="$articles"></x-slider>
 
     <div class="max-w-6xl mx-auto px-4 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -26,16 +26,14 @@
                                 <div class="flex justify-between items-start mb-4">
                                     <span
                                         class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium 
-                                        @if($article->category == 'berita')
-                                            bg-blue-100 text-blue-800
+                                        @if ($article->category == 'berita') bg-blue-100 text-blue-800
                                         @elseif($article->category == 'lowongan-kerja')
                                             bg-green-100 text-green-800
                                         @elseif($article->category == 'pengumuman')
                                             bg-yellow-100 text-yellow-800
                                         @elseif($article->category == 'kegiatan')
-                                            bg-red-100 text-red-800
-                                        @endif">
-                                        @if($article->category == 'berita')
+                                            bg-red-100 text-red-800 @endif">
+                                        @if ($article->category == 'berita')
                                             <i class="fas fa-newspaper mr-1 text-xs"></i>
                                         @elseif($article->category == 'lowongan-kerja')
                                             <i class="fas fa-briefcase mr-1 text-xs"></i>
@@ -46,7 +44,8 @@
                                         @endif
                                         {{ $article->category }}
                                     </span>
-                                    <span class="text-xs text-gray-500">{{ $article->updated_at->diffForHumans() }}</span>
+                                    <span
+                                        class="text-xs text-gray-500">{{ $article->updated_at->diffForHumans() }}</span>
                                 </div>
 
                                 <!-- Content -->
@@ -143,20 +142,15 @@
                         Akses Cepat
                     </h3>
                     <div class="space-y-3">
-                        <a href="#"
+                        <a href="{{ route('info.category', ['category' => 'lowongan-kerja']) }}"
                             class="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200 group">
                             <i class="fas fa-briefcase mr-3 text-blue-600 group-hover:text-blue-700"></i>
                             <span>Lowongan Kerja</span>
                         </a>
                         <a href="#"
                             class="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200 group">
-                            <i class="fas fa-file-alt mr-3 text-blue-600 group-hover:text-blue-700"></i>
-                            <span>Daftar Pelamar</span>
-                        </a>
-                        <a href="#"
-                            class="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200 group">
                             <i class="fas fa-building mr-3 text-blue-600 group-hover:text-blue-700"></i>
-                            <span>Perusahaan Mitra</span>
+                            <span> Perusahaan Mitra</span>
                         </a>
                         <a href="#"
                             class="flex items-center text-gray-700 hover:text-blue-600 transition-colors duration-200 group">

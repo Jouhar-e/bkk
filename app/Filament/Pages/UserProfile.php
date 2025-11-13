@@ -3,11 +3,10 @@
 namespace App\Filament\Pages;
 
 use BackedEnum;
-use Filament\Pages\Page;
 use Filament\Facades\Filament;
+use Filament\Pages\Page;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Support\Facades\Auth;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Forms\Components\TextInput;
@@ -19,8 +18,8 @@ class UserProfile extends Page implements HasForms
 {
     use InteractsWithForms;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserCircle;
-    protected static ?string $navigationLabel = 'Profile';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::UserCircle;
+    protected static ?string $navigationLabel = 'Profil User';
     protected static ?string $title = 'User Profile';
     protected string $view = 'filament.pages.user-profile';
 
@@ -30,8 +29,14 @@ class UserProfile extends Page implements HasForms
     {
         $user = Auth::user();
 
-        $formData = $user->toArray();
-        $this->form->fill($formData);
+        $this->form->fill([
+            'name' => $user->name,
+            'email' => $user->email,
+            'phone' => $user->phone,
+            'role' => $user->role,
+            'avatar' => $user->avatar,
+            'is_active' => $user->is_active,
+        ]);
     }
 
     protected function getFormSchema(): array
@@ -39,39 +44,38 @@ class UserProfile extends Page implements HasForms
         return [
             Section::make('Personal Information')
                 ->schema([
-                    TextInput::make('name') // Sesuai field 'name' di migration
+                    TextInput::make('name')
                         ->label('Nama Lengkap')
                         ->required()
                         ->maxLength(255),
 
-                    TextInput::make('email') // Sesuai field 'email' di migration
+                    TextInput::make('email')
                         ->label('Email')
                         ->email()
                         ->required()
                         ->maxLength(255)
-                        ->unique('users', 'email'), // Validasi unique
+                        ->unique('users', 'email', ignoreRecord: true),
                 ])
                 ->columns(2),
 
             Section::make('Account Information')
                 ->schema([
                     TextInput::make('password')
-                        ->label('Password')
+                        ->label('Password Baru')
                         ->password()
-                        ->required()
                         ->minLength(8)
-                        ->revealable(), // Fitun show/hide password
+                        ->revealable()
+                        ->dehydrated(fn($state) => filled($state))
+                        ->rules(['confirmed']),
 
-                    Select::make('role') // Sesuai field 'role' di migration
-                        ->label('Role')
-                        ->options([
-                            'admin' => 'Administrator',
-                            'operator' => 'Operator',
-                        ])
-                        ->default('operator')
-                        ->required(),
+                    TextInput::make('password_confirmation')
+                        ->label('Konfirmasi Password Baru')
+                        ->password()
+                        ->minLength(8)
+                        ->revealable()
+                        ->dehydrated(false),
 
-                    TextInput::make('phone') // Sesuai field 'phone' di migration
+                    TextInput::make('phone')
                         ->label('Nomor Telepon')
                         ->tel()
                         ->maxLength(20)
@@ -81,20 +85,53 @@ class UserProfile extends Page implements HasForms
 
             Section::make('Additional Information')
                 ->schema([
-                    FileUpload::make('avatar') // Sesuai field 'avatar' di migration
+                    FileUpload::make('avatar')
                         ->label('Foto Profil')
                         ->image()
+                        ->disk('public')
+                        ->directory('uploads/articles')
                         ->avatar()
                         ->directory('avatars')
+                        ->maxSize(2048)
                         ->nullable(),
 
-                    Toggle::make('is_active') // Sesuai field 'is_active' di migration
+                    Toggle::make('is_active')
                         ->label('Status Aktif')
                         ->default(true)
                         ->onColor('success')
-                        ->offColor('danger'),
+                        ->offColor('danger')
+                        ->disabled(),
                 ])
                 ->columns(2),
         ];
+    }
+
+    protected function getFormModel(): string
+    {
+        return Auth::user()::class;
+    }
+
+    public function save(): void
+    {
+        try {
+            $data = $this->form->getState();
+            $user = Auth::user();
+
+            // Handle password update
+            if (empty($data['password'])) {
+                unset($data['password']);
+            } else {
+                $data['password'] = bcrypt($data['password']);
+            }
+
+            // Remove confirmation field
+            unset($data['password_confirmation']);
+
+            $user->update($data);
+
+            $this->notify('success', 'Profile berhasil diperbarui!');
+        } catch (\Exception $e) {
+            $this->notify('danger', 'Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
 }
